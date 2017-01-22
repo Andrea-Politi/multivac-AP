@@ -8,6 +8,8 @@
     - mongodb
     - jenkins
     - docker.io
+    - python-docker
+    - git
   handlers:
   - name: start the basic packages
     service: name=redis-server state=started

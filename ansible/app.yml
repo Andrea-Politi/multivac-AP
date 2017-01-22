@@ -1,0 +1,8 @@
+- hosts: web
+  sudo: yes
+  tasks:	
+    - name: clone the source repo
+      git: repo=https://github.com/Andrea-Politi/multivac-AP dest=/opt
+
+    - name: build docker image
+      docker_image: name="alpine_img" path="/opt/MultiVAC" tag="latest" state="build"
