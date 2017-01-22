@@ -52,8 +52,8 @@ def post_multivac():
 def del_multivac():
 
     n_answer = db.entropy.find().count()
-    if n_answer == 1:
-        answer = db.entropy.delete()
+    if n_answer != 0:
+        answer = db.entropy.delete_one({})
 	return "Deleted!"
     else:
         return "no such data"
