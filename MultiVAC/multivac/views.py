@@ -38,7 +38,7 @@ def get_multivac():
         return answer
 
 
-@multivac_bp.route("/multivac/data", methods=['POST'])
+@multivac_bp.route("/multivac/data", methods=['POST','PUT'])
 def post_multivac():
     value = request.form['data']
 
@@ -47,3 +47,13 @@ def post_multivac():
 
     return Response(response=json.dumps({"response": "MultiVAC updated!"}),
                     status=200, mimetype="application/json")
+
+@multivac_bp.route("/multivac/zzz/", methods=['DELETE'])
+def del_multivac():
+
+    n_answer = db.entropy.find().count()
+    if n_answer == 1:
+        answer = db.entropy.delete()
+	return "Deleted!"
+    else:
+        return "no such data"
