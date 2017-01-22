@@ -10,9 +10,25 @@
     - docker.io
     - python-docker
     - git
+
   handlers:
   - name: start the basic packages
     service: name=redis-server state=started
     service: name=mongodb state=started
     service: name=jenkins state=started
     service: name=docker state=started
+
+  - iptables:
+    name: allow_tcp_5000
+    rules: '-A INPUT -p tcp -m tcp --dport 5000 -j ACCEPT'
+
+# Open TCP port 22, but insert it before port 80 (default weight is 40)
+  - iptables:
+    name: allow_tcp_22
+    rules: '-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT'
+    weight: 35
+
+  - iptables:
+    name: allow_tcp_8080
+    rules: '-A INPUT -p tcp -m tcp --dport 8080 -j ACCEPT'
+    weight: 38
