@@ -1,0 +1,16 @@
+- hosts: web
+  tasks:
+  - name: install basic packages
+    action: apt name={{item}} state=installed update_cache=true
+    with_items:
+    - python
+    - redis-server
+    - mongodb
+    - jenkins
+    - docker.io
+  handlers:
+  - name: start the basic packages
+    service: name=redis-server state=started
+    service: name=mongodb state=started
+    service: name=jenkins state=started
+    service: name=docker state=started
