@@ -1,0 +1,3 @@
+#!/bin/bash
+JENKINS_URL='138.197.76.203:8080'
+curl  http://admin:2877c8b010ef5b0db9a3a83522f59cc0@$JENKINS_URL/git/notifyCommit?url=https://github.com/Andrea-Politi/Multivac-AP

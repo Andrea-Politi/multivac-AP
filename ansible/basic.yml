@@ -1,5 +1,9 @@
 - hosts: web
   tasks:
+  - name: add repo
+    sudo: yes
+    command: wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add - && echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list && apt-get update
+
   - name: install basic packages
     action: apt name={{item}} state=installed update_cache=true
     with_items:
