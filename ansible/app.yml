@@ -7,5 +7,10 @@
     - name: build docker image
       docker_image: name="alpine_img" path="/opt/MultiVAC" tag="latest" state="build"
 
-#    - name: run container
-#      command: docker -d run --name app --net='host' -v /app/logs:/var/log/app/ -it alpine_img
+    - name: run container
+      docker_container: 
+        name: app
+        image: alpine_img
+        state: started
+        network_mode: host
+        volumes: /app/logs:/var/log/app
